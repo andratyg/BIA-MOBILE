@@ -13,9 +13,26 @@ class SensorData {
 
   factory SensorData.fromJson(Map<String, dynamic> json) {
     return SensorData(
-      temperature: _toDouble(json['suhu'] ?? json['temperature'] ?? 0),
-      humidity: _toDouble(json['lembap'] ?? json['humidity'] ?? 0),
-      soilMoisture: _toDouble(json['kelembapan_tanah'] ?? json['soil_moisture'] ?? 0),
+      temperature: _toDouble(
+        json['suhu'] ?? json['temperature'] ?? json['temp'] ?? 0,
+      ),
+      humidity: _toDouble(
+        json['kelembapan_udara'] ??
+            json['kelembapan'] ??
+            json['kelembaban_udara'] ??
+            json['kelembaban'] ??
+            json['lembap'] ??
+            json['humidity'] ??
+            json['hum'] ??
+            0,
+      ),
+      soilMoisture: _toDouble(
+        json['kelembapan_tanah'] ??
+            json['kelembaban_tanah'] ??
+            json['soil_moisture'] ??
+            json['soil'] ??
+            0,
+      ),
     );
   }
 
